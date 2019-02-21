@@ -11,45 +11,51 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
 </head>
 <body class="bg-secondary">
-
-        <div class="container">
-                <div class="row">
-                  <div class="col-sm">
-                    
-                  </div>
-                  <div class="col-lg bg-light">
-                        <a href="/shows" class="float-right">Go Back</a>
-                        <p class='h1'>Edit Show {{show.id}}</p>
-                        <form action="/shows/{{show.id}}/update" method="POST">
-                            {% csrf_token %}
-                            <div class="form-group">
-                                <label for="title">Title</label>
-                                <input type="text" class="form-control" name="title" id="title" value='{{show.title}}'>
-                            </div>
-                            <div class="form-group">
-                                <label for="network">Network</label>
-                                <input type="text" class="form-control" name="network" id="network" value='{{show.network}}' >
-                    
-                                <label class="control-label" for="releaseDate">Release Date</label>
-                                <input class="form-control" id="releaseDate" name="releaseDate" value="{{show.releaseDate|date:'Y-m-d'}}" type="text"/>
-                    
-                    
-                            </div>
-                            <div class="form-group">
-                                <label for="description">Description</label>
-                                <textarea class="form-control" name="description" id="description" rows="3" >{{show.description}}</textarea>
-                            </div>
-                            <div class="text-center">
-                                <button type = 'submit' class='btn btn-primary'>Update</button>
-                            </div>
-                            
-                        </form>
-                  </div>
-                  <div class="col-sm">
-                    
-                  </div>
-                </div>
-              </div>
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                
+            </div>
+            <div class="col-lg bg-light">
+                <a href="/shows" class="float-right">Go Back</a>
+                <p class='h1'>Edit Show {{show.id}}</p>
+                <form action="/shows/{{show.id}}/update" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input type="text" class="form-control" name="title" id="title" value='{{show.title}}'>
+                    </div>
+                    <div class="form-group">
+                        <label for="network">Network</label>
+                        <input type="text" class="form-control" name="network" id="network" value='{{show.network}}' >
+            
+                        <label class="control-label" for="releaseDate">Release Date</label>
+                        <input class="form-control" id="releaseDate" name="releaseDate" value="{{show.releaseDate|date:'Y-m-d'}}" type="text"/>
+            
+            
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea class="form-control" name="description" id="description" rows="3" >{{show.description}}</textarea>
+                    </div>
+                    <div class="text-center">
+                        <button type = 'submit' class='btn btn-primary'>Update</button>
+                    </div>
+                        
+                </form>
+            </div>
+            <div class="col-sm">
+                
+            </div>
+            </div>
+        </div>
     
     
     <!-- Optional JavaScript -->
@@ -60,8 +66,8 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
     <script>
         $(document).ready(function(){
-            console.log('running script')
-            var date_input=$('input[name="releaseDate"]'); //our date input has the name "date"
+            
+            var date_input=$('input[name="releaseDate"]'); //our date input has the name "releaseDate"
             var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
             var options={
             format: 'yyyy-mm-dd',

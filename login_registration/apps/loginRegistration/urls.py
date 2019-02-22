@@ -7,5 +7,6 @@ urlpatterns = [
     path('users/create', views.users_create),
     path('users/<int:id>', views.users_show),
     path('users/login', views.users_login),
-    path('logout',views.logout)
+    path('logout',views.logout),
+    path('ajax/validate_email/', views.validate_email, name='validate_email'),
 ]

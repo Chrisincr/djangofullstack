@@ -2,7 +2,9 @@ from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.contrib.messages import get_messages
 from apps.loginRegistration.models import *
+from django.http import JsonResponse
 import bcrypt
+
 
 
 def home(request):
@@ -68,4 +70,10 @@ def logout(request):
         del request.session['email']
     return redirect('/')
 
-    
+
+def validate_email(request):
+    email = request.GET.get('email', None)
+    data = {
+        'is_taken' : Users.objects.filter(email__iexact=email).exists()
+    }
+    return JsonResponse(data)
